@@ -46,6 +46,7 @@ Run with:
 
 ````ts
 /** Define a test suite */
+export function suite(meta: ImportMeta): (test: DefineTest) => void
 export function suite(meta: ImportMeta, define: (test: DefineTest) => void): void
 
 /** Describe a test */
