@@ -18,4 +18,5 @@ export function setup(meta) {
   return test
 }
 
-export const suite = (meta, define) => define(setup(meta))
+export const suite = (meta, define) =>
+  define ? define(setup(meta)) : setup(meta)

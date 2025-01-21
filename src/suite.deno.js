@@ -22,4 +22,4 @@ test.not = {
   equal: assertNotEquals
 }
 
-export const suite = (meta, define) => define(test)
+export const suite = (meta, define) => (define ? define(test) : test)

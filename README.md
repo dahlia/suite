@@ -11,29 +11,29 @@ Describe tests that run in the native test runners of Node.js, Deno and Bun.
 // example.test.js
 import {suite} from '@alinea/suite'
 
-suite(import.meta, test => {
-  test('is', () => {
-    test.is(1, 1)
-  })
+const test = suite(import.meta)
 
-  test('deep equal', () => {
-    test.equal({a: 1}, {a: 1})
-  })
+test('is', () => {
+  test.is(1, 1)
+})
 
-  test('async', async () => {
-    await new Promise(resolve => setTimeout(resolve, 100))
-    test.ok(true)
-  })
+test('deep equal', () => {
+  test.equal({a: 1}, {a: 1})
+})
 
-  test('throws', () => {
-    test.throws(() => {
-      throw new Error('test')
-    }, 'test')
-  })
+test('async', async () => {
+  await new Promise(resolve => setTimeout(resolve, 100))
+  test.ok(true)
+})
 
-  test.skip('skip', () => {
-    test.ok(false)
-  })
+test('throws', () => {
+  test.throws(() => {
+    throw new Error('test')
+  }, 'test')
+})
+
+test.skip('skip', () => {
+  test.ok(false)
 })
 ````
 
