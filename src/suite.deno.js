@@ -7,6 +7,12 @@ import {
   assertStrictEquals,
   assertThrows
 } from '../node_modules/@jsr/std__assert/mod.js'
+import {
+  afterAll,
+  afterEach,
+  beforeAll,
+  beforeEach
+} from '../node_modules/@jsr/std__testing/bdd.js'
 
 const native = Deno.test
 const test = native.bind()
@@ -21,5 +27,9 @@ test.not = {
   is: assertNotStrictEquals,
   equal: assertNotEquals
 }
+test.beforeAll = beforeAll
+test.beforeEach = beforeEach
+test.afterEach = afterEach
+test.afterAll = afterAll
 
 export const suite = (meta, define) => define(test)

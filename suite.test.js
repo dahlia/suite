@@ -1,6 +1,11 @@
 import {suite} from '#suite'
 
 suite(import.meta, test => {
+  test.beforeEach(() => console.log('before'))
+  test.afterEach(() => console.log('after'))
+  test.afterAll(() => console.log('after all'))
+  test.beforeAll(() => console.log('before all'))
+
   test('truthy', () => {
     test.ok(true)
   })

@@ -6,7 +6,8 @@
   "type": "module",
   "files": ["./dist", "./src"],
   "devDependencies": {
-    "@jsr/std__assert": "^0.225.2",
+    "@jsr/std__assert": "^1.0.2",
+    "@jsr/std__testing": "^1.0.2",
     "@types/bun": "latest",
     "typescript": "^5.0.0"
   },

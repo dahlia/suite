@@ -3,6 +3,14 @@ export type Describe = (name: string, run: () => void | Promise<void>) => void
 
 /** Define a test suite */
 export interface DefineTest extends Describe {
+  /** Run this before all tests */
+  beforeAll: (fn: () => void | Promise<void>) => void
+  /** Run this before each test */
+  beforeEach: (fn: () => void | Promise<void>) => void
+  /** Run this after all tests */
+  afterAll: (fn: () => void | Promise<void>) => void
+  /** Run this after each test */
+  afterEach: (fn: () => void | Promise<void>) => void
   /** Skip the test */
   skip: Describe
   /** Only run this test */
@@ -29,7 +37,6 @@ export interface DefineTest extends Describe {
 /** Define a test suite */
 export interface Suite {
   (meta: ImportMeta, define: (test: DefineTest) => void): void
-  // runtime: 'node' | 'deno' | 'bun'
 }
 
 export const suite: Suite
