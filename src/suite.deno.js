@@ -32,4 +32,4 @@ test.beforeEach = beforeEach
 test.afterEach = afterEach
 test.afterAll = afterAll
 
-export const suite = (meta, define) => define(test)
+export const suite = (meta, define) => (define ? define(test) : test)

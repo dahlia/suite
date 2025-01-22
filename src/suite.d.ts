@@ -36,6 +36,7 @@ export interface DefineTest extends Describe {
 
 /** Define a test suite */
 export interface Suite {
+  (meta: ImportMeta): ((test: DefineTest) => void)
   (meta: ImportMeta, define: (test: DefineTest) => void): void
 }
 

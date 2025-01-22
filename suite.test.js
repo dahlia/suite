@@ -1,56 +1,56 @@
 import {suite} from '#suite'
 
-suite(import.meta, test => {
-  test.beforeEach(() => console.log('before'))
-  test.afterEach(() => console.log('after'))
-  test.afterAll(() => console.log('after all'))
-  test.beforeAll(() => console.log('before all'))
+const test = suite(import.meta)
 
-  test('truthy', () => {
-    test.ok(true)
-  })
+test.beforeEach(() => console.log('before'))
+test.afterEach(() => console.log('after'))
+test.afterAll(() => console.log('after all'))
+test.beforeAll(() => console.log('before all'))
 
-  test('falsy', () => {
-    test.not.ok(false)
-  })
-
-  test('equal', () => {
-    test.equal({a: 1}, {a: 1})
-  })
-
-  test('not equal', () => {
-    test.not.equal({a: 1}, {a: 2})
-  })
-
-  test('strict equal', () => {
-    test.is(1, 1)
-  })
-
-  test('not strict equal', () => {
-    test.not.is(1, '1')
-  })
-
-  test('throws', () => {
-    test.throws(() => {
-      throw new Error('ok')
-    })
-  })
-
-  test('throws message', () => {
-    test.throws(() => {
-      throw new Error('a message')
-    }, 'message')
-  })
-
-  test.skip('skip', () => {
-    test.ok(false)
-  })
-
-  test('async', async () => {
-    test.ok(true)
-  })
-
-  /*test.only('only', () => {
-    test.ok(true)
-  })*/
+test('truthy', () => {
+  test.ok(true)
 })
+
+test('falsy', () => {
+  test.not.ok(false)
+})
+
+test('equal', () => {
+  test.equal({a: 1}, {a: 1})
+})
+
+test('not equal', () => {
+  test.not.equal({a: 1}, {a: 2})
+})
+
+test('strict equal', () => {
+  test.is(1, 1)
+})
+
+test('not strict equal', () => {
+  test.not.is(1, '1')
+})
+
+test('throws', () => {
+  test.throws(() => {
+    throw new Error('ok')
+  })
+})
+
+test('throws message', () => {
+  test.throws(() => {
+    throw new Error('a message')
+  }, 'message')
+})
+
+test.skip('skip', () => {
+  test.ok(false)
+})
+
+test('async', async () => {
+  test.ok(true)
+})
+
+/*test.only('only', () => {
+  test.ok(true)
+})*/
