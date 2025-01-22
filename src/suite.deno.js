@@ -11,10 +11,10 @@ import {
   afterAll,
   afterEach,
   beforeAll,
-  beforeEach
+  beforeEach,
+  it as native
 } from '../node_modules/@jsr/std__testing/bdd.js'
 
-const native = Deno.test
 const test = native.bind()
 test.skip = native.ignore
 test.only = native.only

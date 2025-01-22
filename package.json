@@ -5,20 +5,21 @@
   "types": "./src/suite.d.ts",
   "type": "module",
   "files": ["./dist", "./src"],
-  "devDependencies": {
-    "@jsr/std__assert": "^1.0.2",
-    "@jsr/std__testing": "^1.0.2",
-    "@types/bun": "latest",
-    "typescript": "^5.0.0"
+  "publishConfig": {
+    "access": "public"
   },
   "scripts": {
     "build": "bun build src/suite.deno.js --outdir=dist --minify",
-    "test": "node --test && deno test && bun test",
+    "test:node": "node --test",
+    "test:deno": "bun run build && deno test",
     "deploy": "npm publish && npx jsr publish",
     "prepublishOnly": "bun run build"
   },
-  "publishConfig": {
-    "access": "public"
+  "devDependencies": {
+    "@jsr/std__assert": "^1.0.9",
+    "@jsr/std__testing": "^1.0.9",
+    "@types/bun": "latest",
+    "typescript": "^5.7.3"
   },
   "exports": {
     ".": {
