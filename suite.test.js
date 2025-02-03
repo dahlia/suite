@@ -1,22 +1,26 @@
 import {suite} from '#suite'
 
-const test = suite(import.meta)
-
-let status = ''
-
-test.beforeAll(() => (status = 'before'))
-test.beforeEach(() => {
-  if (status !== 'before' && status !== 'afterEach')
-    throw new Error(`hooks did not run, ${status}`)
-  status = 'beforeEach'
+const test = suite(import.meta, {
+  status: '',
+  beforeAll() {
+    this.status = 'beforeAll'
+  },
+  beforeEach() {
+    if (this.status !== 'beforeAll' && this.status !== 'afterEach')
+      throw new Error(`hooks did not run, ${this.status}`)
+    this.status = 'beforeEach'
+  },
+  afterEach() {
+    this.status = 'afterEach'
+  },
+  afterAll() {
+    if (this.status !== 'afterEach')
+      throw new Error(`hooks did not run, ${this.status}`)
+  }
 })
-test.afterEach(() => (status = 'afterEach'))
-test.afterAll(() => {
-  if (status !== 'afterEach') throw new Error(`hooks did not run, ${status}`)
-})
 
-test('before each', () => {
-  test.equal(status, 'beforeEach')
+test('before each', ctx => {
+  test.equal(ctx.status, 'beforeEach')
 })
 
 test('truthy', () => {

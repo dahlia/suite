@@ -1,3 +1,5 @@
+import {createSuite} from './shared.js'
+
 export function setup(meta) {
   const native = Bun.jest(meta.path)
   const test = native.test.bind()
@@ -22,5 +24,4 @@ export function setup(meta) {
   return test
 }
 
-export const suite = (meta, define) =>
-  define ? define(setup(meta)) : setup(meta)
+export const suite = createSuite(setup)

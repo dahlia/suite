@@ -1,20 +1,9 @@
 /** Describe a test */
-export type Describe = (name: string, run: () => void | Promise<void>) => void
+export interface Describe<Context>{
+  (name: string, run: (context: Context) => void | Promise<void>): void
+} 
 
-/** Define a test suite */
-export interface DefineTest extends Describe {
-  /** Run this before all tests */
-  beforeAll: (fn: () => void | Promise<void>) => void
-  /** Run this before each test */
-  beforeEach: (fn: () => void | Promise<void>) => void
-  /** Run this after all tests */
-  afterAll: (fn: () => void | Promise<void>) => void
-  /** Run this after each test */
-  afterEach: (fn: () => void | Promise<void>) => void
-  /** Skip the test */
-  skip: Describe
-  /** Only run this test */
-  only: Describe
+interface Assert {
   /** Assert that actual is a truthy value */
   ok(actual: any): void
   /** Assert that actual strictly equals (===) the expects value */
@@ -34,10 +23,29 @@ export interface DefineTest extends Describe {
   }
 }
 
+interface Hooks {
+  /** Run this before all tests */
+  beforeAll?(fn: () => void | Promise<void>): void
+  /** Run this before each test */
+  beforeEach?(fn: () => void | Promise<void>): void
+  /** Run this after all tests */
+  afterAll?(fn: () => void | Promise<void>): void
+  /** Run this after each test */
+  afterEach?(fn: () => void | Promise<void>): void
+}
+
+/** Define a test suite */
+export interface DefineTest<Context> extends Describe<Context>, Assert {
+  /** Skip the test */
+  skip: Describe<Context>
+  /** Only run this test */
+  only: Describe<Context>
+}
+
 /** Define a test suite */
 export interface Suite {
-  (meta: ImportMeta): ((test: DefineTest) => void)
-  (meta: ImportMeta, define: (test: DefineTest) => void): void
+  <Context extends Hooks>(meta: ImportMeta, context?: Context): DefineTest<Context>
+  (meta: ImportMeta, define: (test: DefineTest<undefined>) => void): void
 }
 
 export const suite: Suite

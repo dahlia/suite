@@ -14,6 +14,7 @@ import {
   beforeEach,
   it as native
 } from '../node_modules/@jsr/std__testing/bdd.js'
+import {createSuite} from './shared.js'
 
 const test = native.bind()
 test.skip = native.ignore
@@ -32,4 +33,4 @@ test.beforeEach = beforeEach
 test.afterEach = afterEach
 test.afterAll = afterAll
 
-export const suite = (meta, define) => (define ? define(test) : test)
+export const suite = createSuite(() => test)
