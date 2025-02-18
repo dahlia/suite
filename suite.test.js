@@ -1,5 +1,27 @@
 import {suite} from '#suite'
-const test = suite(import.meta)
+
+const test = suite(import.meta, {
+  status: '',
+  beforeAll() {
+    this.status = 'beforeAll'
+  },
+  beforeEach() {
+    if (this.status !== 'beforeAll' && this.status !== 'afterEach')
+      throw new Error(`hooks did not run, ${this.status}`)
+    this.status = 'beforeEach'
+  },
+  afterEach() {
+    this.status = 'afterEach'
+  },
+  afterAll() {
+    if (this.status !== 'afterEach')
+      throw new Error(`hooks did not run, ${this.status}`)
+  }
+})
+
+test('before each', ctx => {
+  test.equal(ctx.status, 'beforeEach')
+})
 
 test('truthy', () => {
   test.ok(true)
@@ -46,5 +68,5 @@ test('async', async () => {
 })
 
 /*test.only('only', () => {
-  test.ok(true)
-})*/
+    test.ok(true)
+  })*/

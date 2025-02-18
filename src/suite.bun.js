@@ -1,3 +1,5 @@
+import {createSuite} from './shared.js'
+
 export function setup(meta) {
   const native = Bun.jest(meta.path)
   const test = native.test.bind()
@@ -15,8 +17,11 @@ export function setup(meta) {
     is: (a, b) => native.expect(a).not.toBe(b),
     equal: (a, b) => native.expect(a).not.toEqual(b)
   }
+  test.beforeAll = native.beforeAll.bind(native)
+  test.beforeEach = native.beforeEach.bind(native)
+  test.afterEach = native.afterEach.bind(native)
+  test.afterAll = native.afterAll.bind(native)
   return test
 }
 
-export const suite = (meta, define) =>
-  define ? define(setup(meta)) : setup(meta)
+export const suite = createSuite(setup)

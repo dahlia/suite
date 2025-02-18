@@ -1,5 +1,6 @@
 import * as asserts from 'node:assert'
 import * as native from 'node:test'
+import {createSuite} from './shared.js'
 
 const test = native.test.bind()
 test.skip = native.skip
@@ -13,5 +14,9 @@ test.not = {
   is: asserts.notStrictEqual,
   equal: asserts.notDeepStrictEqual
 }
+test.beforeAll = native.before.bind(native)
+test.beforeEach = native.beforeEach.bind(native)
+test.afterEach = native.afterEach.bind(native)
+test.afterAll = native.after.bind(native)
 
-export const suite = (meta, define) => (define ? define(test) : test)
+export const suite = createSuite(() => test)
