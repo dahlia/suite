@@ -1,5 +1,5 @@
 /** Describe a test */
-export interface Describe<Context>{
+export interface Describe<Context = void>{
   (name: string, run: (context: Context) => void | Promise<void>): void
 } 
 
@@ -35,7 +35,7 @@ interface Hooks {
 }
 
 /** Define a test suite */
-export interface DefineTest<Context> extends Describe<Context>, Assert {
+export interface DefineTest<Context = void> extends Describe<Context>, Assert {
   /** Skip the test */
   skip: Describe<Context>
   /** Only run this test */
@@ -45,7 +45,7 @@ export interface DefineTest<Context> extends Describe<Context>, Assert {
 /** Define a test suite */
 export interface Suite {
   <Context extends Hooks>(meta: ImportMeta, context?: Context): DefineTest<Context>
-  (meta: ImportMeta, define: (test: DefineTest<undefined>) => void): void
+  (meta: ImportMeta, define: (test: DefineTest) => void): void
 }
 
 export const suite: Suite
