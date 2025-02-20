@@ -9,10 +9,18 @@ export function createSuite(setup) {
       if ('afterEach' in ctx) test.afterEach(ctx.afterEach.bind(ctx))
       if ('afterAll' in ctx) test.afterAll(ctx.afterAll.bind(ctx))
     }
-    return Object.assign((name, run) => {
-      return test(name, () => {
-        return run(ctx)
-      })
-    }, test)
+    return Object.assign(
+      (name, run) => {
+        return test(name, () => {
+          return run(ctx)
+        })
+      },
+      test,
+      {
+        only(name, run) {
+          return test.only(name, () => run(ctx))
+        }
+      }
+    )
   }
 }
