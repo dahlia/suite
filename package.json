@@ -26,6 +26,7 @@
       "deno": "./dist/suite.deno.js",
       "bun": "./src/suite.bun.js",
       "node": "./src/suite.node.js",
+      "require": "./src/suite.cjs",
       "types": "./src/suite.d.ts"
     },
     "./package.json": "./package.json"
@@ -34,6 +35,7 @@
     "#suite": {
       "bun": "./src/suite.bun.js",
       "node": "./src/suite.node.js",
+      "require": "./src/suite.cjs",
       "types": "./src/suite.d.ts"
     }
   }

@@ -1,4 +1,4 @@
-import {suite} from '#suite'
+import { suite } from '#suite'
 
 const test = suite(import.meta, {
   status: '',
