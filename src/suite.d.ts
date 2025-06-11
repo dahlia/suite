@@ -11,7 +11,9 @@ interface Assert {
   /** Assert that actual is deeply equal to the expects value */
   equal(actual: any, expects: any): void
   /** Assert that the fn function throws an Error */
-  throws<Return extends void | Promise<void>>(fn: () => Return, messageIncludes?: string): Return
+  throws(fn: () => Promise<unknown>, messageIncludes?: string): Promise<void>
+  /** Assert that the fn function throws an Error */
+  throws(fn: () => unknown, messageIncludes?: string): void
   /** Assert inverse */
   not: {
     /** Assert that actual is a falsy value */
