@@ -1,4 +1,12 @@
 {
+  "name": "@hongminhee/suite",
+  "version": "0.6.3",
+  "license": "MIT",
+  "exports": "./jsr.ts",
+  "publish": {
+    "include": ["README.md", "jsr.ts", "src", "dist"],
+    "exclude": ["!dist"]
+  },
   "imports": {
     "#suite": "./dist/suite.deno.js"
   }
